@@ -1,28 +1,33 @@
 package com.likeazusa2.supergraphiteelectrode.mixin;
 
-import blusunrize.immersiveengineering.api.utils.ItemUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceLogic;
 import com.likeazusa2.supergraphiteelectrode.item.ModItems;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(value = ArcFurnaceLogic.class, remap = false)
+@Mixin(ArcFurnaceLogic.class)
 public abstract class ArcFurnaceLogicMixin
 {
+    /** Preserve IE's normal damage call for every other item while keeping this electrode infinite. */
     @Redirect(
             method = "tickServer",
             at = @At(
                     value = "INVOKE",
-                    target = "Lblusunrize/immersiveengineering/api/utils/ItemUtils;damageStackableItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;I)V"
-            ),
-            remap = false
+                    target = "Lnet/minecraft/world/item/ItemStack;hurt(ILnet/minecraft/util/RandomSource;Lnet/minecraft/server/level/ServerPlayer;)Z"
+            )
     )
-    private void superGraphiteElectrode$preventElectrodeDamage(ItemStack stack, Level level, int amount)
+    private boolean superGraphiteElectrode$preventElectrodeDamage(
+            ItemStack stack, int amount, RandomSource random, ServerPlayer player
+    )
     {
-        if(!stack.is(ModItems.SUPER_GRAPHITE_ELECTRODE.get()))
-            ItemUtils.damageStackableItem(stack, level, amount);
+        if(stack.is(ModItems.SUPER_GRAPHITE_ELECTRODE.get()))
+        {
+            return false;
+        }
+        return stack.hurt(amount, random, player);
     }
 }

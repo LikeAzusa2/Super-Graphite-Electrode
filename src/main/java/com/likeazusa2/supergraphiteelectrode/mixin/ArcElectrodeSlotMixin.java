@@ -8,15 +8,18 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = IESlot.ArcElectrode.class, remap = false)
+@Mixin(IESlot.ArcElectrode.class)
 public abstract class ArcElectrodeSlotMixin
 {
-    @Inject(method = "mayPlace", at = @At("HEAD"), cancellable = true, remap = false)
+    /** IE normally accepts only its exact graphite-electrode item instance. */
+    @Inject(method = "mayPlace", at = @At("HEAD"), cancellable = true)
     private void superGraphiteElectrode$acceptInfiniteElectrode(
             ItemStack stack, CallbackInfoReturnable<Boolean> callback
     )
     {
         if(stack.is(ModItems.SUPER_GRAPHITE_ELECTRODE.get()))
+        {
             callback.setReturnValue(true);
+        }
     }
 }

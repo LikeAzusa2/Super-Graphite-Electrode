@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "immersiveengineering:graphite_electrode" },
+    { "item": "minecraft:nether_star" }
+  ],
+  "result": {
+    "id": "super_graphite_electrode:super_graphite_electrode",
+    "count": 1
+  }
+}

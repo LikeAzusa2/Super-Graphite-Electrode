@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.likeazusa2.supergraphiteelectrode.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ArcElectrodeSlotMixin",
+    "ArcFurnaceLogicMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

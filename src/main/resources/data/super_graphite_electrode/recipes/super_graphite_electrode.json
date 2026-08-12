@@ -1,9 +1,14 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "immersiveengineering:graphite_electrode" },
-    { "item": "minecraft:nether_star" }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GNG",
+    "GGG"
   ],
+  "key": {
+    "G": { "item": "immersiveengineering:graphite_electrode" },
+    "N": { "item": "minecraft:nether_star" }
+  },
   "result": {
     "item": "super_graphite_electrode:super_graphite_electrode",
     "count": 1

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "GNG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "immersiveengineering:graphite_electrode" },
+    "N": { "item": "minecraft:nether_star" }
+  },
+  "result": {
+    "id": "super_graphite_electrode:super_graphite_electrode",
+    "count": 1
+  }
+}
